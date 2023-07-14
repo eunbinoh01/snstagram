@@ -27,12 +27,6 @@
     </ul>
   </div>
 
-  <!-- tab -->
-  <!-- <div v-if="step === 0">내용0</div>
-  <div v-if="step === 1">내용1</div>
-  <div v-if="step === 2">내용2</div>
-  <div style="margin-top : 500px;"></div> -->
-
 </div>
 </template>
 
