@@ -1,11 +1,14 @@
 <template>
 <div>
   <div class="header">
-    <ul class="header-button-left">
-      <li>Cancel</li>
+    <ul class="header-button-right">
+      <li v-if="step === 1" @click="step++">Next</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step === 2" @click="publish">Publish</li>
+    </ul>
+    <ul class="header-button-left">
+      <li v-if="step === 2" @click="step = 0">Cancel</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
@@ -17,12 +20,22 @@
     <span class="tab_button" @click="step = 2">Write</span>
   </div>
 
-  <ContainerA :myData="myData" :step="step"/>
+  <!-- store 꺼내 쓰는 법 -->
+  <!-- <h4> {{  $store.state.likes }}</h4> -->
+  <!-- <h4> {{  $store.state.name }}</h4> -->
+  <!-- <button @click="$store.state.name = '블라블라'">CHANGE</button>  
+       : store는 컴포넌트에서 직접 값을 수정하면 안됨! 
+       => 수정하고 싶으면 store_ mutations( store.commit('fx') ) 에 명령할 것! 
+  -->
+  <!-- <button @click="$store.commit('changeNm')">CHANGE</button> -->
+  <!-- <button @click="$store.commit('pushLike', 1)">LIKE</button> -->
+
+  <ContainerA :myData="myData" :step="step" :imgUrl="imgUrl" @write="writePost($event), $event" />
   <button v-if="step === 0" class="more_btn" @click="more()">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="uploadImg" accept="image/*" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+ UPLOAD</label>
     </ul>
   </div>
@@ -42,12 +55,19 @@ export default {
     return {
       myData : myData,
       postCnt : 0,
-      step : 0
+      step : 0,
+      imgUrl : '' ,
+      postContent : '',
+      selectFilter : ''
     }
+  },
+  mounted(){
+    this.emitter.on('adaptFilter', (f)=> {
+      this.selectFilter = f; 
+    })
   },
   components: {
     ContainerA,
-
   },
   methods : {
     more(){
@@ -57,8 +77,31 @@ export default {
         this.myData.push(res.data)
         this.postCnt++;
       })
+    },
+    uploadImg(e){
+      let files = e.target.files;
+      this.imgUrl = URL.createObjectURL(files[0]);
 
-    }
+      this.step++;
+    },
+    writePost(content){
+      this.postContent = content;
+    },
+    publish(){
+      let postData = {
+        name: "Vue Developer",
+        userImage: this.imgUrl,
+        postImage: this.imgUrl,
+        likes: 0,
+        date: new Date().getMonth()+1 + '월 ' + new Date().getDay() +'일',
+        // date: Intl.DateTimeFormat('en-US', {month:'long'}).format(new Date())+ ' ' + new Date().getDay(),
+        liked: false,
+        content: this.postContent,
+        filter: this.selectFilter  
+      }
+      this.myData.unshift(postData);
+      this.step = 0;
+    },
   }
 }
 </script>
@@ -89,7 +132,7 @@ ul {
   top: 0;
 }
 .header-button-left {
-  color: skyblue;
+  color:  rgb(61, 100, 61);
   float: left;
   width: 50px;
   padding-left: 20px;
@@ -97,7 +140,7 @@ ul {
   margin-top: 10px;
 }
 .header-button-right {
-  color: skyblue;
+  color: rgb(61, 100, 61);
   float: right;
   width: 50px;
   cursor: pointer;
@@ -130,6 +173,7 @@ ul {
 .input-plus {
   cursor: pointer;
   margin: 20px 5px 100px 5px;
+  color:  rgb(61, 100, 61);
 }
 #app {
   box-sizing: border-box;

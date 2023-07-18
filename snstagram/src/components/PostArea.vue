@@ -1,12 +1,25 @@
 <template>
 <div class="post">
     <div class="post-header">
-      <div class="profile" style="{background-image: `url(${myData.userImage})`;}"></div>
+      <div class="profile" :style="`background-image: url(${myData.userImage})`"></div>
       <span class="profile-name">{{ myData.name }}</span>
     </div>
-    <div class="post-body" style="{background-image : `url(${myData.postImage})` }"></div>
+    <div 
+         class="post-body" 
+        :class="myData.filter" 
+        :style="`background-image : url(${myData.postImage})`"
+        @click="$store.commit('pushLike',myData)"
+    ></div>
     <div class="post-content">
-      <p>{{ myData.likes }} Likes</p>
+      <p>
+        <img src="../assets/like_before.png" class="like_icon" :class="['hidden' , myData.liked == true]" 
+          @click="$store.commit('pushLike',myData)"
+        />
+        <img src="../assets/like_after.png" class="like_icon" :class="['' , myData.liked == true]" 
+          @click="$store.commit('pushLike',myData)"
+        />
+        {{ myData.likes }} Likes
+      </p>
       <p><strong>{{ myData.name }}</strong> {{ myData.content }}</p>
       <p class="date">{{ myData.date }}</p>
     </div>
@@ -62,5 +75,13 @@ export default {
   color: grey;
   margin-top: -8px;
 } 
+.like_icon {
+  width: 15px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+.hidden {
+  display: none;
+}
 </style>
         

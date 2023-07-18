@@ -1,26 +1,38 @@
 <template>
 <div>
+  <!-- Tab_0 ) Posts List -->
   <div v-if="step===0">
     <PostArea v-for="md in myData" :key="md" :myData="md"/>
   </div>
 
-  <!-- 필터선택페이지 -->
+  <!--  Tab_1 ) Detail 필터선택페이지 -->
   <div v-if="step===1">
-    <div class="upload-image"></div>
+    <div class="upload-image" :class="selectFilter" :style="`background-image: url(${imgUrl})`" ></div>
     <div class="filters">
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
-      <div class="filter-1"></div>
+      <FilterBox :imgUrl="imgUrl" v-for="f in filters" :key="f" :filterNm="f">
+        <!-- 자식 slot에  데이터 전달--> 
+        {{ f }}
+        <!-- 
+          slot 여러개 사용하는 법
+          <template v-slot:slotA> 데이터A</template>
+          <template v-slot:slotB> 데이터A</template> 
+          -->
+        <!--
+          slot props
+          1. <slot :자식데이터="자식데이터"></slot>
+          2. 부모는 <template v-slot:default="작명" > 후에 {{ 작명.자식데이터 }} 
+          <template v-slot:default="작명"> <span>{{ 작명.data }}</span> </template>
+        -->
+        
+      </FilterBox>
     </div>
   </div>
 
-  <!-- 글작성페이지 -->
+  <!--  Tab_2 ) Write 글작성페이지 -->
   <div v-if="step===2">
-    <div class="upload-image" ></div>
+    <div class="upload-image" :class="selectFilter" :style="`background-image: url(${imgUrl})`"></div>
     <div class="write">
-      <textarea class="write-box" placeholder="write hear!"></textarea>
+      <textarea @input="$emit('write', $event.target.value)" class="write-box" placeholder="write hear!"></textarea>
     </div>
   </div>  
     
@@ -29,14 +41,32 @@
     
 <script>
 import PostArea from './PostArea.vue'
+import FilterBox from './FilterBox.vue'
+
 export default {
     name: 'ContainerA',
+    data(){
+      return {
+        filters : [ "aden", "_1977", "brannan", "brooklyn", "clarendon", "earlybird", "gingham", "hudson", 
+                    "inkwell", "kelvin", "lark", "lofi", "maven", "mayfair", "moon", "nashville", "perpetua", 
+                    "reyes", "rise", "slumber", "stinson", "toaster", "valencia", "walden", "willow", "xpro2"],
+        selectFilter : ''
+      }
+    },
     components : {
       PostArea,
+      FilterBox
     },
     props : {
       myData : Array,
-      step : Number
+      step : Number,
+      imgUrl : String,
+      postContent : String
+    },
+    mounted() {
+        this.emitter.on('adaptFilter', (f)=> {
+          this.selectFilter = f; 
+        })
     }
 }
 </script>
@@ -45,22 +75,11 @@ export default {
 .upload-image{
   width: 100%;
   height: 450px;
-  background-image: url("https://picsum.photos/100?random=0");
   background-size : cover;
 }
 .filters{
   overflow-x:scroll;
   white-space: nowrap;
-}
-.filter-1 {
-  width: 100px;
-  height: 100px;
-  border: 1px solid cornflowerblue;
-  margin: 10px 10px 10px auto;
-  padding: 8px;
-  display: inline-block;
-  color : white;
-  background-size: cover;
 }
 .filters::-webkit-scrollbar {
   height: 5px;
@@ -84,4 +103,5 @@ export default {
   display: block;
   outline: none;
 }
+
 </style>
