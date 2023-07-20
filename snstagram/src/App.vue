@@ -28,10 +28,18 @@
        => 수정하고 싶으면 store_ mutations( store.commit('fx') ) 에 명령할 것! 
   -->
   <!-- <button @click="$store.commit('changeNm')">CHANGE</button> -->
-  <!-- <button @click="$store.commit('pushLike', 1)">LIKE</button> -->
+  <!-- <button @click="$store.commit('pushLike', myData)">LIKE</button>   -->
+  
 
   <ContainerA :myData="myData" :step="step" :imgUrl="imgUrl" @write="writePost($event), $event" />
-  <button v-if="step === 0" class="more_btn" @click="more()">더보기</button>
+
+
+  <button v-if="step === 0" class="more_btn" @click="$store.dispatch('getData')">더보기</button>
+  <p>{{  $store.state.more  }}</p>
+  <!-- 
+    $store.commit -> mutations 에 요청
+    $store.dispatch -> actions 에 요청
+  -->
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -46,8 +54,7 @@
 <script>
 import ContainerA from './components/ContainerA';
 import myData from './assets/myData.js';
-import axios from 'axios'
-
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'App',
@@ -70,14 +77,14 @@ export default {
     ContainerA,
   },
   methods : {
-    more(){
-      if(this.postCnt > 1) return;
-      axios.get(`https://codingapple1.github.io/vue/more${this.postCnt}.json`)
-      .then( res => {
-        this.myData.push(res.data)
-        this.postCnt++;
-      })
-    },
+    // more(){
+    //   if(this.postCnt > 1) return;
+    //   axios.get(`https://codingapple1.github.io/vue/more${this.postCnt}.json`)
+    //   .then( res => {
+    //     this.myData.push(res.data)
+    //     this.postCnt++;
+    //   })
+    // },
     uploadImg(e){
       let files = e.target.files;
       this.imgUrl = URL.createObjectURL(files[0]);
@@ -102,6 +109,22 @@ export default {
       this.myData.unshift(postData);
       this.step = 0;
     },
+  },
+  computed : {
+    // computed : 일종의 계산결과 저장공간
+    // 컴포넌트 로드할때 딱 1번만 실행, 그 값을 계속 저장해서 씀
+    name(){
+      return this.$store.state.name
+    },
+    // ...mapState(['stateNm1', 'stateNm2']) //여러개의 복잡한 state 한꺼번에 꺼내서 쓸 때
+    ...mapState({ 작명 : 'name' }) //여러개의 복잡한 state 한꺼번에 꺼내서 쓸 때
+    , ...mapMutations(['setMore', 'pushLike' ,'changeNm']) //$store.commit('pushLike')대신 pushLike(); 
+  }
+  ,
+  getters: {
+    getUserById: (state)=> {
+      return (userId) => state.users.find((user)=> user.id === userId)
+    }
   }
 }
 </script>
