@@ -35,7 +35,7 @@
 
 
   <button v-if="step === 0" class="more_btn" @click="$store.dispatch('getData')">더보기</button>
-  <p>{{  $store.state.more  }}</p>
+  <!-- <p>{{  $store.state.more  }}</p> -->
   <!-- 
     $store.commit -> mutations 에 요청
     $store.dispatch -> actions 에 요청
@@ -62,7 +62,7 @@ export default {
     return {
       myData : myData,
       postCnt : 0,
-      step : 0,
+      step : 3,
       imgUrl : '' ,
       postContent : '',
       selectFilter : ''

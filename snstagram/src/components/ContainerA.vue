@@ -35,6 +35,10 @@
       <textarea @input="$emit('write', $event.target.value)" class="write-box" placeholder="write hear!"></textarea>
     </div>
   </div>  
+
+  <div v-if="step===3">
+    <MyPage :one="1"/>
+  </div>
     
 </div>
 </template>
@@ -42,6 +46,7 @@
 <script>
 import PostArea from './PostArea.vue'
 import FilterBox from './FilterBox.vue'
+import MyPage from './MyPage.vue'
 
 export default {
     name: 'ContainerA',
@@ -55,7 +60,8 @@ export default {
     },
     components : {
       PostArea,
-      FilterBox
+      FilterBox,
+      MyPage
     },
     props : {
       myData : Array,
