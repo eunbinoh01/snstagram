@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-10-11T05:33:22.284Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="eVN_HxvLk-1Q4vZdMDmc" version="22.0.4" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2023-10-11T05:47:25.856Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36" etag="6mJuOJSMTUblcMpsoxly" version="22.0.4" type="github" pages="3">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="조회">
     <mxGraphModel dx="1841" dy="2226" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -143,7 +143,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="I57p5ygNT6BtR7KV1EMp" name="페이지-3">
-    <mxGraphModel dx="2035" dy="1230" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1628" dy="1022" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -253,12 +253,24 @@
             <mxPoint y="-8" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="opAA3omX16UUN0BzFTfk-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+        <mxCell id="opAA3omX16UUN0BzFTfk-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.006;entryY=0.683;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="opAA3omX16UUN0BzFTfk-55">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="910" y="976" as="targetPoint" />
             <mxPoint x="514" y="936" as="sourcePoint" />
             <Array as="points">
               <mxPoint x="514" y="976" />
+              <mxPoint x="1019" y="976" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="opAA3omX16UUN0BzFTfk-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="958.5" y="266" as="targetPoint" />
+            <mxPoint x="509.5" y="936.0000000000002" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="515" y="976" />
+              <mxPoint x="965" y="976" />
+              <mxPoint x="965" y="266" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -295,10 +307,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="opAA3omX16UUN0BzFTfk-55" value="&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;Session에 있는 Log객체&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;DB INSERT&lt;/b&gt;" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;strokeColor=#3333FF;" vertex="1" parent="1">
-          <mxGeometry x="912" y="944" width="160" height="60" as="geometry" />
+          <mxGeometry x="1060" y="934" width="160" height="60" as="geometry" />
         </mxCell>
         <mxCell id="opAA3omX16UUN0BzFTfk-57" value="&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;Session에 있는 Log객체&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;업데이트&lt;/b&gt;" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;strokeColor=#3333FF;" vertex="1" parent="1">
-          <mxGeometry x="880" y="210" width="160" height="60" as="geometry" />
+          <mxGeometry x="883" y="210" width="160" height="60" as="geometry" />
         </mxCell>
         <mxCell id="opAA3omX16UUN0BzFTfk-58" value="&lt;b style=&quot;border-color: var(--border-color);&quot;&gt;API Main Log 객체&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;Session에 저장&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=1;strokeColor=#3333FF;" vertex="1" parent="1">
           <mxGeometry x="440" y="220" width="150" height="60" as="geometry" />
